@@ -46,8 +46,10 @@ The license of the setup is too old, and it does not function with the latest Mo
 
 License Information – should not be needed, writing them here just in case (if you copy the files they are not needed, and they seem to not be present in the Motive online database, since they are so old): 
 
-> License Serial Number: MVCL1827 
-> License Hash Code: 2329-189B-CA3F-364C 
+> License Serial Number: MVCL1827
+>
+> License Hash Code: 2329-189B-CA3F-364C
+>
 > Hardware Key: 104992 
 
  
@@ -93,6 +95,8 @@ cd mocap_optitrack
 git checkout 7723217bf63b71d1272832901305a4e6f60c22b2 
 ```
 
+Or clone directly this repo:
+
 ```
 mkdir ~/catkin_ws_optitrack/src/ 
 
@@ -108,19 +112,31 @@ catkin_make
 Modify `~/catkin_ws_optitrack/src/mocap_optitrack/config/mocap.yaml`, so it looks something like this (modify your `<RIGID_BODY_ID>`, e.g. ‘8’, and the topic names, depending on what would you like to have. Leave the optitrack_configs like this, and make sure, that they are the same in the Motive as well): 
 
 
-> rigid_bodies:  
->   '<RIGID_BODY_ID>':  
+> rigid_bodies:
+>
+>   '<RIGID_BODY_ID>':
+>
 >       pose: Robot_1/pose 
->       pose2d: Robot_1/ground_pose 
->       odom: Robot_1/Odom 
->       tf: tf 
->       child_frame_id: Robot_1/base_link 
->       parent_frame_id: world 
-> optitrack_config: 
->   multicast_address: 239.255.42.99 
->   command_port: 1510 
->   data_port: 1511 
->   enable_optitrack: true 
+>
+>       pose2d: Robot_1/ground_pose
+>
+>       odom: Robot_1/Odom
+>
+>       tf: tf
+>
+>       child_frame_id: Robot_1/base_link
+>
+>       parent_frame_id: world
+>
+> optitrack_config:
+>
+>   multicast_address: 239.255.42.99
+>
+>   command_port: 1510
+>
+>   data_port: 1511
+>
+>   enable_optitrack: true
 
 ``` 
 source ~/catkin_ws_optitrack/devel/setup.bash 
