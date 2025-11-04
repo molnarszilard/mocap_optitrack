@@ -114,29 +114,29 @@ Modify `~/catkin_ws_optitrack/src/mocap_optitrack/config/mocap.yaml`, so it look
 
 > rigid_bodies:
 >
->   '<RIGID_BODY_ID>':
+>        '<RIGID_BODY_ID>':
 >
->       pose: Robot_1/pose 
+>               pose: Robot_1/pose 
 >
->       pose2d: Robot_1/ground_pose
+>               pose2d: Robot_1/ground_pose
 >
->       odom: Robot_1/Odom
+>               odom: Robot_1/Odom
 >
->       tf: tf
+>               tf: tf
 >
->       child_frame_id: Robot_1/base_link
+>               child_frame_id: Robot_1/base_link
 >
->       parent_frame_id: world
+>               parent_frame_id: world
 >
 > optitrack_config:
 >
->   multicast_address: 239.255.42.99
+>        multicast_address: 239.255.42.99
 >
->   command_port: 1510
+>        command_port: 1510
 >
->   data_port: 1511
+>        data_port: 1511
 >
->   enable_optitrack: true
+>        enable_optitrack: true
 
 ``` 
 source ~/catkin_ws_optitrack/devel/setup.bash 
