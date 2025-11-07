@@ -1,0 +1,102 @@
+/oak:
+ros__parameters:
+  camera:
+    i_calibration_dump: false
+    i_enable_diagnostics: true
+    i_enable_ir: false
+    i_enable_sync: true
+    i_external_calibration_path: ""
+    i_floodlight_brightness: 0
+    i_ip: ""
+    i_laser_dot_brightness: 800
+    i_mx_id: ""
+    i_nn_type: none
+    i_pipeline_dump: false
+    i_pipeline_type: RGBStereo
+    i_rs_compat: false
+    i_usb_speed: SUPER_PLUS
+    diagnostic_updater:
+    period: 1.0
+  pipeline_gen:
+    i_enable_diagnostics: true
+    i_enable_imu: true
+    i_enable_sync: true
+  imu:
+    i_acc_cov: 0.0
+    i_acc_freq: 400
+    i_batch_report_threshold: 5
+    i_enable_rotation: true
+    i_get_base_device_timestamp: false
+    i_gyro_cov: 0.0
+    i_gyro_freq: 400
+    i_mag_cov: 0.0
+    i_max_batch_reports: 10
+    i_message_type: IMU
+    i_rot_cov: -1.0
+    i_sync_method: LINEAR_INTERPOLATE_ACCEL
+    i_update_ros_base_time_on_ros_msg: false
+  left:
+    i_enable_lazy_publisher: true
+    i_fps: 30.0
+    i_fsync_continuous: true
+    i_fsync_trigger: true
+    i_get_base_device_timestamp: true
+    i_height: 720
+    i_max_q_size: 30
+    i_publish_compressed: false
+    i_publish_topic: true
+    i_resolution: 720P
+    i_reverse_stereo_socket_order: false
+    i_sensor_img_orientation: AUTO
+    i_synced: true
+    i_update_ros_base_time_on_ros_msg: false
+    i_width: 1280
+    r_exposure: 1000
+    r_iso: 800
+    r_set_man_exposure: false
+  rgb:
+    i_add_exposure_offset: false
+    i_enable_lazy_publisher: true
+    i_fps: 30.0
+    i_fsync_continuous: true
+    i_fsync_trigger: true
+    i_get_base_device_timestamp: true
+    i_height: 720
+    i_interleaved: false
+    i_isp_den: 3
+    i_isp_num: 2
+    i_max_q_size: 30
+    i_output_isp: true
+    i_preview_height: 300
+    i_preview_size: 300
+    i_preview_width: 300
+    i_publish_compressed: false
+    i_publish_topic: true
+    i_resolution: 1080P
+    i_reverse_stereo_socket_order: false
+    i_sensor_img_orientation: AUTO
+    i_synced: true
+    i_update_ros_base_time_on_ros_msg: false
+    i_width: 1280
+    r_exposure: 20000
+    r_focus: 1
+    r_iso: 800
+    r_whitebalance: 3300
+  right:
+    i_enable_lazy_publisher: true
+    i_fps: 30.0
+    i_fsync_continuous: true
+    i_fsync_trigger: true
+    i_get_base_device_timestamp: true
+    i_height: 720
+    i_max_q_size: 30
+    i_publish_compressed: false
+    i_publish_topic: true
+    i_resolution: 720P
+    i_sensor_img_orientation: AUTO
+    i_synced: true
+    i_update_ros_base_time_on_ros_msg: true
+    i_width: 1280
+    r_exposure: 1000
+    r_iso: 800
+    r_set_man_exposure: false

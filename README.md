@@ -150,10 +150,11 @@ If you want to use ROS2 (you might try the same mocap_optitrack repo to see if t
 
 ## Setting up a ros1_bridge 
 
-For the setup mostly follow [https://github.com/ros2/ros1_bridge](https://github.com/ros2/ros1_bridge). You will need a system where both ROS1 and ROS2 works (Noetic+Foxy is the most safe options, but noetic and Humble also works, maybe other combinations as well). On Xavier AGX, Noetic is installed from apt repos, while Humble is installed from source in `~/ros2_humble`, here is also the ros1_bridge source. On the AGX, in .bashrc, there are two alieses: 
+For the setup mostly follow [https://github.com/ros2/ros1_bridge](https://github.com/ros2/ros1_bridge). You will need a system where both ROS1 and ROS2 works (Noetic+Foxy is the most safe options, but noetic and Humble also works, maybe other combinations as well). On Xavier AGX, Noetic is installed from apt repos, while Humble is installed from source in `~/ros2_humble`, here is also the ros1_bridge source. (a few other elements are installed at `~/ros2_humble_extra`) On the AGX, in .bashrc, there are two alieses: 
 
-> alias useros1="source /opt/ros/noetic/setup.bash" 
-> alias useros2="source /home/rocon/ros2_humble/install/local_setup.bash" 
+> alias useros1="source /opt/ros/noetic/setup.bash"
+>
+> alias useros2="source /home/rocon/ros2_humble/install/local_setup.bash && source /home/rocon/ros2_humble_extra/install/local_setup.bash" 
 
 None of the ROS versions is sourced by default (can cause a problem in a few cases). 
 
@@ -167,9 +168,100 @@ useros2
 ros2 run ros1_bridge dynamic_bridge --bridge-all-topics 
 ```
 
-You can also use a bash script, which sets up the required nodes using tmux: `optitrack_ros1_bridge_tmux.sh`
+You can also use a bash script, which sets up the required nodes using tmux:
+`optitrack_ros1_bridge_tmux.sh`
 
-Setting up this on one computer (e.g., AGX), the ROS2 topic will be visible for all other copmuters on the same network, also running ROS2 (preferably Humble).
+Setting up this on one computer (e.g., AGX), the ROS2 topic will be visible for all other computers on the same network, also running ROS2 (preferably Humble).
+
+## Pioneer P3-AT
+
+For this robot you need to install rosaria (preferably on ROS1):
+
+```
+sudo apt install aria2 libaria-dev
+```
+
+Build [rosaria](https://github.com/amor-ros-pkg/rosaria#):
+
+```
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+git clone https://github.com/amor-ros-pkg/rosaria.git
+cd ~/catkin_ws
+catkin_make
+```
+
+## Oak D-Lite camera
+
+Follow the instructions from [https://docs.luxonis.com/software/ros/depthai-ros/](https://docs.luxonis.com/software/ros/depthai-ros/) to install the depthai-ros-drivers. You can install them on ROS Noetic and Humble (or Iron) using (building from source is not recommended) - This project was done using Humble:
+
+`sudo apt install ros-<distro>-depthai-ros`
+
+There might be a problem with the arguments of the camera, in this case follow modifications in [depthai_files](depthai_files): the `camera.launch.py` is located at `/opt/ros/humble/share/depthai_ros_driver/launch.camera.launch.py`. Here you might want to modify the file around Line 173. This is almost hardcoding the values in `tf_params`:
+
+>    tf_params = {
+>    
+>         "camera": {
+>    
+>                "i_pipeline_type":'RGBStereo',
+>    
+>                "i_nn_type": 'none',
+>    
+>        },
+>    
+>        "pipeline_gen": {
+>    
+>                "i_enable_imu": True,
+>    
+>        },
+>    
+>        "left": {
+>    
+>                "i_fps": 20.0,
+>    
+>                "i_synced": False,
+>    
+>        },
+>    
+>        "right": {
+>    
+>                "i_fps": 20.0,
+>    
+>                "i_synced": False,
+>    
+>        },
+>    
+>        "rgb": {
+>    
+>                "i_fps": 20.0,
+>    
+>                "i_synced": False,
+>    
+>        },
+>    
+>        "imu": {
+>    
+>                "i_rot_cov": -1.0,
+>    
+>                "i_gyro_cov": 0.0,
+>    
+>                "i_mag_cov": 0.0,v
+>        },
+>    
+>    }
+
+You can launch the camera using:
+
+```
+ros2 launch depthai_ros_driver camera.launch.py
+```
+
+## Entire Pipeline
+
+To run the entire pipeline on the AGX: Oak D-Lite camera: image, imu, optitrack with rosbag record:
+`opti_oak_record_into_bag.sh`
+
+A few commands are not run by default, you have to press Enter, when yo uare ready. (You can navigate between tmux terminals using <Ctrl+b> then `ArrowKey`. To kill the entire server from another terminal run: `tmux kill-server`)
 
  
 

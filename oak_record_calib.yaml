@@ -1,0 +1,24 @@
+/oak:
+  ros__parameters:
+    camera_model: "OAK-D-LITE"
+
+    # Time sync – stamps messages from the device clock with sync on
+    i_enable_sync: true
+
+    # IMU
+    i_enable_imu: true
+    imu.i_max_q_size: 50
+
+    # RGB camera (raw Bayer output; use 'isp' instead of 'raw' if you want minimally processed color)
+    rgb.i_enable: true
+    rgb.i_fps: 30
+    rgb.i_output: "raw"       # options commonly include: raw, isp, video, preview, still
+
+    # Stereo (publish left/right images only; no depth/disparity/rectify)
+    stereo.i_enable: true
+    stereo.i_fps: 30
+    stereo.i_compute_depth: false
+    stereo.i_rectify: false
+
+    # Disable any neural networks/features
+    nn.i_enable: false
