@@ -171,7 +171,7 @@ ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
 You can also use a bash script, which sets up the required nodes using tmux:
 `optitrack_ros1_bridge_tmux.sh`
 
-Setting up this on one computer (e.g., AGX), the ROS2 topic will be visible for all other computers on the same network, also running ROS2 (preferably Humble).
+Setting up this on one computer (e.g., AGX), the ROS2 topic will be visible for all other computers on the same network, also running ROS2 (preferably Humble). Please check this file, because some paths might not be set correctly.
 
 ## Pioneer P3-AT
 
@@ -260,6 +260,8 @@ ros2 launch depthai_ros_driver camera.launch.py
 
 To run the entire pipeline on the AGX: Oak D-Lite camera: image, imu, optitrack with rosbag record:
 `opti_oak_record_into_bag.sh`
+
+Please check this file, because some paths might not be set correctly.
 
 A few commands are not run by default, you have to press Enter, when yo uare ready. (You can navigate between tmux terminals using <Ctrl+b> then `ArrowKey`. To kill the entire server from another terminal run: `tmux kill-server`)
 
