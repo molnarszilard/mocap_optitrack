@@ -111,32 +111,23 @@ catkin_make
 
 Modify `~/catkin_ws_optitrack/src/mocap_optitrack/config/mocap.yaml`, so it looks something like this (modify your `<RIGID_BODY_ID>`, e.g. ‘8’, and the topic names, depending on what would you like to have. Leave the optitrack_configs like this, and make sure, that they are the same in the Motive as well): 
 
+```
+rigid_bodies:
+       '<RIGID_BODY_ID>':
+              pose: Robot_1/pose 
+              pose2d: Robot_1/ground_pose
+              odom: Robot_1/Odom
+              tf: tf
+              child_frame_id: Robot_1/base_link
+              parent_frame_id: world
+optitrack_config:
+       multicast_address: 239.255.42.99
+       command_port: 1510
+       data_port: 1511
+       enable_optitrack: true
+```
 
-> rigid_bodies:
->
->        '<RIGID_BODY_ID>':
->
->               pose: Robot_1/pose 
->
->               pose2d: Robot_1/ground_pose
->
->               odom: Robot_1/Odom
->
->               tf: tf
->
->               child_frame_id: Robot_1/base_link
->
->               parent_frame_id: world
->
-> optitrack_config:
->
->        multicast_address: 239.255.42.99
->
->        command_port: 1510
->
->        data_port: 1511
->
->        enable_optitrack: true
+Then source it and launch it:
 
 ``` 
 source ~/catkin_ws_optitrack/devel/setup.bash 
@@ -152,9 +143,10 @@ If you want to use ROS2 (you might try the same mocap_optitrack repo to see if t
 
 For the setup mostly follow [https://github.com/ros2/ros1_bridge](https://github.com/ros2/ros1_bridge). You will need a system where both ROS1 and ROS2 works (Noetic+Foxy is the most safe options, but noetic and Humble also works, maybe other combinations as well). On Xavier AGX, Noetic is installed from apt repos, while Humble is installed from source in `~/ros2_humble`, here is also the ros1_bridge source. (a few other elements are installed at `~/ros2_humble_extra`) On the AGX, in .bashrc, there are two alieses: 
 
-> alias useros1="source /opt/ros/noetic/setup.bash"
->
-> alias useros2="source /home/rocon/ros2_humble/install/local_setup.bash && source /home/rocon/ros2_humble_extra/install/local_setup.bash" 
+```
+alias useros1="source /opt/ros/noetic/setup.bash"
+alias useros2="source /home/rocon/ros2_humble/install/local_setup.bash && source /home/rocon/ros2_humble_extra/install/local_setup.bash" 
+```
 
 None of the ROS versions is sourced by default (can cause a problem in a few cases). 
 
@@ -197,58 +189,36 @@ Follow the instructions from [https://docs.luxonis.com/software/ros/depthai-ros/
 
 `sudo apt install ros-<distro>-depthai-ros`
 
-There might be a problem with the arguments of the camera, in this case follow modifications in [depthai_files](depthai_files): the `camera.launch.py` is located at `/opt/ros/humble/share/depthai_ros_driver/launch.camera.launch.py`. Here you might want to modify the file around Line 173. This is almost hardcoding the values in `tf_params`:
+There might be a problem with the arguments of the camera (see also [arguments](https://docs.luxonis.com/software/ros/depthai-ros/driver)), in this case follow modifications in [depthai_files](depthai_files): the `camera.launch.py` is located at `/opt/ros/humble/share/depthai_ros_driver/launch.camera.launch.py`. Here you might want to modify the file around Line 173. This is almost hardcoding the values in `tf_params`:
 
->    tf_params = {
->    
->         "camera": {
->    
->                "i_pipeline_type":'RGBStereo',
->    
->                "i_nn_type": 'none',
->    
->        },
->    
->        "pipeline_gen": {
->    
->                "i_enable_imu": True,
->    
->        },
->    
->        "left": {
->    
->                "i_fps": 20.0,
->    
->                "i_synced": False,
->    
->        },
->    
->        "right": {
->    
->                "i_fps": 20.0,
->    
->                "i_synced": False,
->    
->        },
->    
->        "rgb": {
->    
->                "i_fps": 20.0,
->    
->                "i_synced": False,
->    
->        },
->    
->        "imu": {
->    
->                "i_rot_cov": -1.0,
->    
->                "i_gyro_cov": 0.0,
->    
->                "i_mag_cov": 0.0,v
->        },
->    
->    }
+```
+   tf_params = {   
+        "camera": {   
+               "i_pipeline_type":'RGBStereo',   
+               "i_nn_type": 'none',   
+       },  
+       "pipeline_gen": {   
+               "i_enable_imu": True,   
+       },   
+       "left": {   
+               "i_fps": 20.0,   
+               "i_synced": False,   
+       },   
+       "right": {   
+               "i_fps": 20.0,   
+               "i_synced": False,   
+       },   
+       "rgb": {   
+               "i_fps": 20.0,   
+               "i_synced": False,   
+       },   
+       "imu": {   
+               "i_rot_cov": -1.0,   
+               "i_gyro_cov": 0.0,   
+               "i_mag_cov": 0.0,
+       },   
+   }
+```
 
 You can launch the camera using:
 

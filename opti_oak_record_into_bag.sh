@@ -7,14 +7,14 @@ tmux new-session -d -s $session_name
 # Split the window into three panes
 tmux selectp -t 0    # select the first (0) pane
 tmux splitw -v -p 50 # split it into two halves
-tmux selectp -t 0    # go back to the first pane
-tmux splitw -h -p 50 # split it into two halves
-tmux selectp -t 1    # go back to the first pane
-tmux splitw -h -p 50 # split it into two halves
-tmux selectp -t 3    # go back to the first pane
-tmux splitw -h -p 50 # split it into two halves
-tmux selectp -t 3    # go back to the first pane
-tmux splitw -h -p 50 # split it into two halves
+tmux selectp -t 0
+tmux splitw -h -p 50
+tmux selectp -t 1
+tmux splitw -h -p 50
+tmux selectp -t 3
+tmux splitw -h -p 50
+tmux selectp -t 3
+tmux splitw -h -p 50
 
 
 # Run the optitrack node
@@ -49,7 +49,7 @@ tmux select-pane -t 5
 tmux send-keys "useros2" Enter
 today=$(date +"%Y_%m_%d"_%H_%M_%S)
 # tmux send-keys "ros2 bag record -o oak_opti_cam_imu_c24_${today} --all" # Enter
-tmux send-keys "ros2 bag record -o oak_opti_cam_imu_c24_${today} /Robot_1/pose /RosAria/cmd_vel /oak/imu/data /oak/rgb/camera_info /oak/rgb/image_raw /oak/stereo/camera_info /oak/stereo/image_raw /tf" # Enter
+tmux send-keys "ros2 bag record -o oak_opti_cam_imu_c24_${today} /Robot_1/pose /RosAria/cmd_vel /oak/imu/data /oak/rgb/camera_info /oak/rgb/image_raw /oak/left/camera_info /oak/left/image_raw /oak/right/camera_info /oak/right/image_raw /tf" # Enter
 
 tmux select-pane -t 4
 
