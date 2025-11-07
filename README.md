@@ -141,11 +141,29 @@ If you want to use ROS2 (you might try the same mocap_optitrack repo to see if t
 
 ## Setting up a ros1_bridge 
 
-For the setup mostly follow [https://github.com/ros2/ros1_bridge](https://github.com/ros2/ros1_bridge). You will need a system where both ROS1 and ROS2 works (Noetic+Foxy is the most safe options, but noetic and Humble also works, maybe other combinations as well). On Xavier AGX, Noetic is installed from apt repos, while Humble is installed from source in `~/ros2_humble`, here is also the ros1_bridge source. (a few other elements are installed at `~/ros2_humble_extra`) On the AGX, in .bashrc, there are two alieses: 
+The Ros1Bridge is found here [https://github.com/ros2/ros1_bridge](https://github.com/ros2/ros1_bridge). You will need a system where both ROS1 and ROS2 works (Noetic+Foxy is the most safe options, but noetic and Humble also works, maybe other combinations as well). On Xavier AGX, Noetic is installed from apt repos, while Humble is installed from source in `~/ros2_humble`, here is also the ros1_bridge source. (a few other elements are installed at `~/ros2_humble_extra`) On the AGX, in .bashrc, there are two alieses: 
 
 ```
 alias useros1="source /opt/ros/noetic/setup.bash"
 alias useros2="source /home/rocon/ros2_humble/install/local_setup.bash && source /home/rocon/ros2_humble_extra/install/local_setup.bash" 
+```
+
+To install Ros1Bridge (start a new terminal, where ROS1 is NOT sourced):
+
+```
+cd ~/ros2_humble/src
+
+git clone https://github.com/ros2/ros1_bridge.git
+
+cd ..
+
+colcon build --symlink-install --packages-skip ros1_bridge
+
+useros1
+
+useros2
+
+colcon build --symlink-install --packages-select ros1_bridge --cmake-force-configure
 ```
 
 None of the ROS versions is sourced by default (can cause a problem in a few cases). 
