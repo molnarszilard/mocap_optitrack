@@ -84,7 +84,7 @@ We have a quite old Motive version (1.8), therefore we cannot really use the off
 First install mocap_optitrack. (a basic doc is [https://wiki.ros.org/mocap_optitrack](https://wiki.ros.org/mocap_optitrack), however it might not work): We have to get the source, and revert to a previous commit (you might be able to experiment with different commits, this is what worked for me): do this, or clone the existing repo:
 
 ```
-mkdir ~/catkin_ws_optitrack/src/ 
+mkdir -p ~/catkin_ws_optitrack/src/ 
 
 cd catkin_ws_optitrack/src/ 
 
@@ -92,13 +92,17 @@ git clone https://github.com/ros-drivers/mocap_optitrack.git
 
 cd mocap_optitrack 
 
-git checkout 7723217bf63b71d1272832901305a4e6f60c22b2 
+git checkout 7723217bf63b71d1272832901305a4e6f60c22b2
+
+cd ../../
+
+catkin_make
 ```
 
 Or clone directly this repo:
 
 ```
-mkdir ~/catkin_ws_optitrack/src/ 
+mkdir -p ~/catkin_ws_optitrack/src/ 
 
 cd catkin_ws_optitrack/src/ 
 
@@ -244,6 +248,8 @@ You can launch the camera using:
 ros2 launch depthai_ros_driver camera.launch.py
 ```
 
+This api should also work in ROS Noetic, however, when I tested, I did not get any data in the imu topic (the topic was present, but not active). However, the arguments can be modified using a config file, instead of `camera.i_pipeline_type` (as in ROS2), in ROS1 you should use `camera_i_pipeline_type`, etc.
+
 ## Entire Pipeline
 
 To run the entire pipeline on the AGX: Oak D-Lite camera: image, imu, optitrack with rosbag record:
@@ -252,6 +258,8 @@ To run the entire pipeline on the AGX: Oak D-Lite camera: image, imu, optitrack 
 Please check this file, because some paths might not be set correctly.
 
 A few commands are not run by default, you have to press Enter, when yo uare ready. (You can navigate between tmux terminals using <Ctrl+b> then `ArrowKey`. To kill the entire server from another terminal run: `tmux kill-server`)
+
+You are also able to use the Full HD Up camera instead of the oak (although, you will only get the P3 odometry instead of an IMU), byt using a different `.sh` file.
 
  
 

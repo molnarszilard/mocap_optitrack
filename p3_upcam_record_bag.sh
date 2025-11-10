@@ -16,7 +16,7 @@ tmux splitw -h -p 50 # split it into two halves
 tmux select-pane -t 0
 tmux send-keys "useros1" Enter
 tmux send-keys "source /home/rocon/catkin_ws/devel/setup.bash" Enter
-tmux send-keys "roslaunch visnav_p3.launch" Enter
+tmux send-keys "roslaunch p3_upcamera.launch" Enter
 
 # Run the teleop.py script in the second pane
 tmux select-pane -t 1
