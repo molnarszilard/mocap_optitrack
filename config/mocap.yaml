@@ -4,7 +4,7 @@
 # Identifier corresponds to Trackable ID set in Tracking Tools
 #
 rigid_bodies:
-    '8':
+    '9':
         pose: Robot_1/pose
         pose2d: Robot_1/ground_pose
         odom: Robot_1/Odom
