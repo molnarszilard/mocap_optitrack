@@ -141,7 +141,7 @@ roslaunch mocap_optitrack mocap.launch
 
 This will launch the node that will publish the topics. You can see them using `rostopic list`
 
-If you want to use ROS2 (you might try the same mocap_optitrack repo to see if there is an implementation or not, but it is not likely), you either use the official plugin with a newer Motive version (you can try to use it with V1.8) or setup a ros1_bridge. 
+> [!Note] If you want to use ROS2 (you might try the same mocap_optitrack repo to see if there is an implementation or not, but it is not likely), you either use the official plugin with a newer Motive version (you can try to use it with V1.8) or setup a ros1_bridge. 
 
 ## Setting up a ros1_bridge 
 
@@ -211,7 +211,7 @@ Follow the instructions from [https://docs.luxonis.com/software/ros/depthai-ros/
 
 `sudo apt install ros-<distro>-depthai-ros`
 
-There might be a problem with the arguments of the camera (see also [arguments](https://docs.luxonis.com/software/ros/depthai-ros/driver)), in this case follow modifications in [depthai_files](depthai_files): the `camera.launch.py` is located at `/opt/ros/humble/share/depthai_ros_driver/launch.camera.launch.py`. Here you might want to modify the file around Line 173. This is almost hardcoding the values in `tf_params`:
+There might be a problem with the arguments of the camera (see also [arguments](https://docs.luxonis.com/software/ros/depthai-ros/driver)), in this case follow modifications in [depthai_files](depthai_files): the `camera.launch.py` is located at `/opt/ros/humble/share/depthai_ros_driver/launch/camera.launch.py`. Here you might want to modify the file around Line 173. This is almost hardcoding the values in `tf_params`:
 
 ```
    tf_params = {   
@@ -248,7 +248,7 @@ You can launch the camera using:
 ros2 launch depthai_ros_driver camera.launch.py
 ```
 
-This api should also work in ROS Noetic, however, when I tested, I did not get any data in the imu topic (the topic was present, but not active). However, the arguments can be modified using a config file, instead of `camera.i_pipeline_type` (as in ROS2), in ROS1 you should use `camera_i_pipeline_type`, etc.
+> [!Note] This api should also work in ROS Noetic, however, when I tested, I did not get any data in the imu topic (the topic was present, but not active). However, the arguments can be modified using a config file, instead of `camera.i_pipeline_type` (as in ROS2), in ROS1 you should use `camera_i_pipeline_type`, etc.
 
 ## Entire Pipeline
 
@@ -259,7 +259,7 @@ Please check this file, because some paths might not be set correctly.
 
 A few commands are not run by default, you have to press Enter, when yo uare ready. (You can navigate between tmux terminals using <Ctrl+b> then `ArrowKey`. To kill the entire server from another terminal run: `tmux kill-server`)
 
-You are also able to use the Full HD Up camera instead of the oak (although, you will only get the P3 odometry instead of an IMU), byt using a different `.sh` file.
+> [!Note] You are also able to use the Full HD Up camera instead of the oak (although, you will only get the P3 odometry instead of an IMU), byt using a different `.sh` file.
 
  
 
