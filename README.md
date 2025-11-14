@@ -12,7 +12,7 @@ Further documentation:
 
 The license of the setup is too old, and it does not function with the latest Motive versions from the official website. You have to use an older version: 1.8.0.  
 
-* Be sure that the following packages are installed to avoid missing .dll errors. The installers are already downloaded as ‘vcredist_x64.exe’, ‘vc_redist.x64.exe’, and ‘dxwebsetup.exe’), or download them from: 
+* Be sure that the following packages are installed to avoid missing .dll errors. The installers are already downloaded as ‘vcredist_x64.exe’, ‘vc_redist.x64.exe’, and ‘dxwebsetup.exe’, or download them from: 
 
 * Microsoft Visual C++ 2010 Redistributable: [https://www.microsoft.com/en-us/download/details.aspx?id=26999](https://www.microsoft.com/en-us/download/details.aspx?id=26999) 
 
