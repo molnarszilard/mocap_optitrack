@@ -216,7 +216,8 @@ There might be a problem with the arguments of the camera (see also [arguments](
 ```
    tf_params = {   
         "camera": {   
-               "i_pipeline_type":'RGBStereo',   
+               # "i_pipeline_type":'RGBStereo',
+               "i_pipeline_type":'RGB',   
                "i_nn_type": 'none',   
        },  
        "pipeline_gen": {   
@@ -232,12 +233,15 @@ There might be a problem with the arguments of the camera (see also [arguments](
        },   
        "rgb": {   
                "i_fps": 20.0,   
-               "i_synced": False,   
+               "i_synced": False,
+               "r_set_man_focus": True,  
        },   
        "imu": {   
                "i_rot_cov": -1.0,   
                "i_gyro_cov": 0.0,   
                "i_mag_cov": 0.0,
+               "i_acc_freq": 400,
+               "i_gyro_freq": 400,
        },   
    }
 ```
