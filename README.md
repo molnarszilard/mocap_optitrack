@@ -246,6 +246,12 @@ There might be a problem with the arguments of the camera (see also [arguments](
    }
 ```
 
+You can run the camera node with:
+
+```
+ros2 run depthai_ros_driver camera_node --ros-args -p camera.i_pipeline_type:=RGB -p camera.i_nn_type:=none -p pipeline_gen.i_enable_imu:=True -p imu.i_rot_cov:=-1.0 -p rgb.r_set_man_focus:=True -p rgb.i_fps:=60.0 -p publish_tf:=True
+```
+
 You can launch the camera using:
 
 ```
@@ -253,6 +259,13 @@ ros2 launch depthai_ros_driver camera.launch.py
 ```
 
 > [!Note] This api should also work in ROS Noetic, however, when I tested, I did not get any data in the imu topic (the topic was present, but not active). However, the arguments can be modified using a config file, instead of `camera.i_pipeline_type` (as in ROS2), in ROS1 you should use `camera_i_pipeline_type`, etc.
+
+> [!Note] On some systems the udev rules might not be correctly set, which can result in an error/warning: `Insufficient permissions to communicate with X_LINK_UNBOOTED device with name "1.1". Make sure udev rules are set`. To resolve this, run the following commands (if using container, run them outside of the container on your main system):
+
+```
+echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="03e7", MODE="0666"' | sudo tee /etc/udev/rules.d/80-movidius.rules
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
 
 ## Entire Pipeline
 
